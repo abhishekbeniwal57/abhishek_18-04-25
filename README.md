@@ -21,8 +21,11 @@ unzip store-monitoring-data.zip
 Make sure the following files are placed in the project root directory:
 
 store_status.csv
+
 menu_hours.csv
+
 timezones.csv 
+
 3. Install dependencies:
 
 ```
