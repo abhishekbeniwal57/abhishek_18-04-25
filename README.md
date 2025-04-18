@@ -9,11 +9,27 @@ The Store Monitoring System is a FastAPI-based service that analyzes store activ
 ## Setup and Installation
 
 1. Clone the repository
-2. Install dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-3. Run the application using one of the following methods:
+2. Download the input data files:
+
+# Download the data files archive
+
+https://storage.googleapis.com/hiring-problem-statements/store-monitoring-data.zip
+
+# Unzip the archive
+
+unzip store-monitoring-data.zip
+Make sure the following files are placed in the project root directory:
+
+store_status.csv
+menu_hours.csv
+timezones.csv 
+3. Install dependencies:
+
+```
+pip install -r requirements.txt
+```
+
+4. Run the application using one of the following methods:
 
    ```
    # Using the run.py script
@@ -168,22 +184,6 @@ The core algorithm for calculating uptime and downtime involves:
 - Database indexes are used to improve query performance
 - Background tasks prevent API blocking during report generation
 
-## Improvement Ideas
-
-1. **Optimization**: Implement more efficient data processing for larger datasets through parallel processing.
-
-2. **Caching**: Implement caching mechanisms to store frequently accessed data (like business hours and timezones) to reduce database queries.
-
-3. **Database Indexing**: Add more specialized indexes to improve query performance for specific operations.
-
-4. **Asynchronous Processing**: Implement a proper task queue system (like Celery with Redis) for handling report generation asynchronously, which would be more robust than the current threading approach.
-
-5. **Frontend Interface**: Add a simple web interface for users to trigger reports and view results.
-
-6. **Testing**: Add comprehensive unit and integration tests to ensure reliability.
-
-7. **API Documentation**: Add Swagger/OpenAPI documentation for the API endpoints.
-
 ## Sample Output
 
 A sample report output looks like:
@@ -195,7 +195,7 @@ store_id,uptime_last_hour(in minutes),uptime_last_day(in hours),update_last_week
 ...
 ```
 
-## Future Improvements
+## Improvement Ideas
 
 While the current implementation meets all the requirements, there are several ways this solution could be enhanced for a production environment:
 
@@ -205,60 +205,9 @@ While the current implementation meets all the requirements, there are several w
 - Use caching mechanisms for frequently accessed data (e.g., Redis) to reduce database load
 - Consider using a more robust database like PostgreSQL for larger datasets and better query performance
 - Implement database indexing strategies optimized for time-series data
-- Use database connection pooling to handle higher concurrency
-
-### Enhanced Features
-
-- Add a dashboard UI to visualize uptime/downtime metrics with interactive charts
 - Implement real-time notifications for store owners when stores go offline
-- Add filters to the API to generate reports for specific stores or time periods
-- Implement export options in different formats (JSON, Excel, PDF)
-- Add historical trend analysis for store performance over time
 
 ### Architecture Improvements
 
 - Implement a message queue system (e.g., RabbitMQ, Kafka) for more robust background processing
 - Create a microservices architecture to separate data ingestion from report generation
-- Containerize the application using Docker for easier deployment and scaling
-- Use Kubernetes for orchestration in a production environment
-- Implement API versioning to support backward compatibility
-
-### Monitoring and Observability
-
-- Integrate logging and monitoring tools (e.g., Prometheus, Grafana)
-- Add application health checks and metrics endpoints
-- Implement automated alerts for slow report generation or system issues
-- Add tracing for performance bottlenecks using tools like Jaeger or Zipkin
-- Create operational dashboards for system health visualization
-
-### Data Handling
-
-- Implement a data versioning system to track changes in store status over time
-- Add data validation and cleansing steps for CSV imports
-- Create a dedicated ETL pipeline for more robust data loading
-- Implement data partitioning for improved query performance
-- Add data retention policies to manage database growth
-
-### Security Enhancements
-
-- Add authentication and authorization for API endpoints
-- Implement rate limiting to prevent API abuse
-- Add data encryption for sensitive information
-- Implement audit logging for all data access
-- Add CORS policies and security headers
-
-### Testing and CI/CD
-
-- Expand test coverage with unit and integration tests
-- Set up automated CI/CD pipelines for continuous deployment
-- Add performance benchmark tests to catch regressions
-- Implement load testing to ensure the system can handle peak traffic
-- Add automated security scanning in the CI/CD pipeline
-
-### Documentation
-
-- Create comprehensive API documentation using tools like Swagger/OpenAPI
-- Add developer guides for code contributions
-- Document data models and business logic for better maintainability
-- Create user guides for store owners and administrators
-- Add sequence diagrams for complex workflows
